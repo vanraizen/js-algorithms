@@ -8,12 +8,10 @@ function bfs (v) {
     queue.push(v);
 
     while(queue.length > 0) {
-        visit(queue);
+        visit();
     }
 
-    console.log('FINAL RESULT', visited);
-
-    function visit(queue) {
+    function visit() {
         var v = queue.splice(0, 1)[0];
         console.log('Visiting -> ', v);
         visited.push(v);
