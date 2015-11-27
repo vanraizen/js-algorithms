@@ -1,4 +1,4 @@
-var inputGraph = require('./germany');
+var inputGraph = require('./../germany');
 
 function bfs (v) {
 
