@@ -35,11 +35,7 @@ function isPalendromeIterative (word) {
     var i,
         rightEdge = word.length - 1,
         halfWay = word.length / 2;
-    for(i = 0; i < word.length; i++) {
-        //we do not need to iterate after the halfway mark
-        if (i >= halfWay) {
-            break;
-        }
+    for(i = 0; i < halfWay; i++) {
         if (word[i] !== word[rightEdge]) {
             return false;
         }
