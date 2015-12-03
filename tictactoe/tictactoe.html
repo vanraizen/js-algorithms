@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tic Tac Toe</title>
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="tictactoe.js"></script>
+        <link rel="stylesheet" type="text/css" href="tictactoe.css">
+        <script>
+            $().ready(function() {
+                var $gameBoard = $('#gameBoard');
+                var game = new TicTacToe($gameBoard);
+                $gameBoard.on('click', 'td', function() {
+                    var id = $(this).attr('id'),
+                        coords = id.match(/(\d)_(\d)/).slice(1);
+                    game.click(coords[0],coords[1]);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="gameBoard"></div>
+    </body>
+</html>
