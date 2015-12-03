@@ -14,3 +14,9 @@ Implemented various regex uses:
 * Basic search custom highlight tag
 * Tag attribute replace
 * Trim
+* Valid Email Detection
+
+Implementation of popular tree traversal algorithms:
+* Pre-Order Traversal
+* In-Order Traversal
+* Post-Order Traversal
