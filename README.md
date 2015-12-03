@@ -20,3 +20,5 @@ Implementation of popular tree traversal algorithms:
 * Pre-Order Traversal
 * In-Order Traversal
 * Post-Order Traversal
+
+Implementation of Tic Tac Toe game in HTML/CSS/JavaScript
