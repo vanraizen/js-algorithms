@@ -29,5 +29,12 @@ describe('Regex Tests', function() {
             expect(regex.trim('    this is a test     ')).to.equal('this is a test');
         });
 
+        it('Is Valid Email Address', function () {
+            expect(regex.isEmail('test@test.com')).to.equal(true);
+            expect(regex.isEmail('test@@test.com')).to.equal(false);
+            expect(regex.isEmail('t!est@test.com')).to.equal(false);
+            expect(regex.isEmail('test@test@test.com')).to.equal(false);
+            expect(regex.isEmail('.com@test.com')).to.equal(false);
+        });
     });
 });

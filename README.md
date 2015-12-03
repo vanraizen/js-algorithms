@@ -3,6 +3,7 @@
 Implementation of popular short problems:
 * Palendrome (both recursive/iterative solutions provided)
 * List all duplicates in array
+* Binary Search
 
 Implementation of popular search algorithms:
 * Depth First Search

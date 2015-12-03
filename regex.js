@@ -9,5 +9,8 @@ module.exports = {
     },
     trim: function(context) {
         return context.replace(/^\s*|\s*$/g, "");
+    },
+    isEmail: function(context) {
+        return !!context.match(/^\w+@\w+\.\w+/);
     }
 };

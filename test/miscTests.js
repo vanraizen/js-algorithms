@@ -13,4 +13,14 @@ describe('Misc Tests', function() {
             expect(misc.listDuplicatesInArray([1, 'knight', 1, 4, 5, 'knight', 7, 'king'])).to.have.members(['knight', 1]);
         });
     });
+
+    describe('Binary Search', function () {
+
+        it('Basic Number Search', function () {
+            expect(misc.binarySearch([1, 2, 5, 77, 222, 1, 2, 7], 222)).to.equal(true);
+            expect(misc.binarySearch([1, 2, 5, 77, 222, 1, 2, 7, 0], 0)).to.equal(true);
+            expect(misc.binarySearch([1, 2, 5, 77, 222, 1, 2, 7, 0, 4], 4)).to.equal(true);
+            expect(misc.binarySearch([1, 2, 5, 77, 222, 1, 2, 7], 80)).to.equal(false);
+        });
+    });
 });
