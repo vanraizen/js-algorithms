@@ -1,5 +1,5 @@
 module.exports = {
-  listDuplicatesInArray: function(arrInput) {
+    listDuplicatesInArray: function(arrInput) {
       var countMap = {},
           duplicates = [];
       arrInput.forEach(function (e) {
@@ -9,8 +9,8 @@ module.exports = {
           }
       });
       return duplicates;
-  },
-  binarySearch: function(input, searchTerm) {
+    },
+    binarySearch: function(input, searchTerm) {
       input.sort(function(a, b) { return Number(a) - Number(b) });
       return search(0, input.length - 1);
       function search(start, end) {
@@ -28,5 +28,42 @@ module.exports = {
               return search(start, middleIndex - 1);
           }
       }
-  }
+    },
+    listDuplicatesInString: function (string1, string2, useTimeEfficientSolution) {
+        var stringWithDuplicates = "";
+
+        if(useTimeEfficientSolution) {
+            moreEfficientSolution();
+        } else {
+            lessEfficientSolution();
+        }
+
+        return stringWithDuplicates.split("").sort().join("");
+
+        //this runs in O(n^2) time
+        function lessEfficientSolution() {
+            var i;
+            for (i = 0; i < string1.length; i++) {
+                if(string2.indexOf(string1[i]) !== -1 && stringWithDuplicates.indexOf(string1[i]) == -1) {
+                    stringWithDuplicates += string1[i];
+                }
+            }
+        }
+
+        //this runs in O(n) time
+        function moreEfficientSolution() {
+            var characterMap = {},
+                i,
+                duplicateMap = {};
+            for (i = 0; i < string1.length; i++) {
+                characterMap[string1[i]] = true;
+            }
+            for (i = 0; i < string2.length; i++) {
+                if(characterMap[string2[i]]) {
+                    duplicateMap[string2[i]] = true;
+                }
+            }
+            stringWithDuplicates = Object.keys(duplicateMap).join("");
+        }
+    }
 };

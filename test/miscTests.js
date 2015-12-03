@@ -5,12 +5,26 @@ describe('Misc Tests', function() {
 
     describe('Detect Duplicates', function () {
 
-        it('Test Map Usage with numbers', function () {
+        it('Array Duplicates: Test Map Usage with numbers', function () {
             expect(misc.listDuplicatesInArray([1, 2, 3, 4, 4, 5, 7, 7])).to.have.members([4, 7]);
         });
 
-        it('Test Map Usage with mixed elements', function () {
+        it('Array Duplicates: Test Map Usage with mixed elements', function () {
             expect(misc.listDuplicatesInArray([1, 'knight', 1, 4, 5, 'knight', 7, 'king'])).to.have.members(['knight', 1]);
+        });
+
+        it('String Duplicates: Test O(n^2) solution', function () {
+            expect(misc.listDuplicatesInString("abcdefghijk", "ijab")).to.equal('abij');
+            expect(misc.listDuplicatesInString("a&8kKL<ASDF", "ZXCV<>")).to.equal('<');
+            expect(misc.listDuplicatesInString("AZSDS", "ZEE3#A")).to.equal('AZ');
+            expect(misc.listDuplicatesInString("S S S A Z X", "X A A #")).to.equal(' AX');
+        });
+
+        it('String Duplicates: Test O(n) solution', function () {
+            expect(misc.listDuplicatesInString("abcdefghijk", "ijab", true)).to.equal('abij');
+            expect(misc.listDuplicatesInString("a&8kKL<ASDF", "ZXCV<>", true)).to.equal('<');
+            expect(misc.listDuplicatesInString("AZSDS", "ZEE3#A", true)).to.equal('AZ');
+            expect(misc.listDuplicatesInString("S S S A Z X", "X A A #", true)).to.equal(' AX');
         });
     });
 
