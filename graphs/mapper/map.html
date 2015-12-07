@@ -1,0 +1,4 @@
+<svg ng-click="handleClick($event)">
+    <circle ng-repeat="node in nodes" cx="{{node.x}}" cy="{{node.y}}" r="10" fill="{{node.color}}" />
+    <text ng-repeat="node in nodes" x="{{node.x-5}}" y="{{node.y}}" dy="0.35em" fill="white">{{node.id}}</text>
+</svg>
