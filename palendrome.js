@@ -6,6 +6,8 @@ module.exports = function (solutionType) {
         solutionFunction = isPalendromeRecursive;
     } else if (solutionType === 'iterative') {
         solutionFunction = isPalendromeIterative;
+    } else if (solutionType === 'native') {
+        solutionFunction = isPalendromeWithNativeFunctions;
     }
 
     return { isPalendrome: solutionFunction };
@@ -42,4 +44,9 @@ function isPalendromeIterative (word) {
         rightEdge--;
     }
     return true;
+}
+
+
+function isPalendromeWithNativeFunctions (word) {
+    return word.split("").reverse().join("") === word;
 }

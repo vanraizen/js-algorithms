@@ -67,3 +67,6 @@ module.exports = {
         }
     }
 };
+
+//14,3:  14 = 1110,   1 (110) -> 1(011) = 11
+//function reverseLastNBits(number, bitsToReverse) {}
