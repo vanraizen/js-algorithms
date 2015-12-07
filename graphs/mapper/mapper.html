@@ -3,13 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <title>Mapper</title>
-        <script src="d3.v2.js"></script>
-        <script src="angular.js"></script>
+        <script src="../../lib/d3.v2.js"></script>
+        <script src="../../lib/angular.js"></script>
         <script src="app.js"></script>
         <script src="mapper.js"></script>
         <link rel="stylesheet" type="text/css" href="mapper.css">
     </head>
     <body ng-controller="MapperController">
+        <button ng-click="startDfs()" id="bfsBtn">DFS</button>
+        <button ng-click="startBfs()" id="dfsBtn">BFS</button>
+        <button ng-click="logMapState()" id="logMapState">Console Log Map State</button>
         <map></map>
     </body>
 </html>
