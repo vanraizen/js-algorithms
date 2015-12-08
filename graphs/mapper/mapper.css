@@ -35,3 +35,6 @@ button {
     bottom: 15px;
     right: 0px;
 }
+circle:hover {
+    cursor: crosshair;
+}
