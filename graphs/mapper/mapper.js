@@ -6,8 +6,8 @@
  */
 angular
     .module('mapper')
-    .directive('map', ['$log', 'BFS', '$document',
-        function ($log, BFS, $document) {
+    .directive('map', ['$log', 'BFS', 'DFS', '$document',
+        function ($log, BFS, DFS, $document) {
 
             var startDfs,
                 startBfs;
@@ -38,8 +38,15 @@ angular
                 };
 
                 this.bfs = function (nodeId) {
+                    this.resetColors();
                     this.busy = true;
                     BFS.go(this.getNode(nodeId))
+                };
+
+                this.dfs = function (nodeId) {
+                    this.resetColors();
+                    this.busy = true;
+                    DFS.go(this.getNode(nodeId))
                 };
 
                 this.getEdges = function () { return this.edges };
@@ -165,7 +172,9 @@ angular
                         var nodeClickId;
                         //console.log($event);
                         if ($event.toElement.tagName === 'svg') {
-                            if (startBfs) {
+                            if(guide.show) {
+                                guide.reset();
+                            } else if (startBfs || startDfs) {
                                 $scope.$emit('clearModes');
                                 startBfs = startDfs = false;
                             } else {
@@ -174,17 +183,13 @@ angular
                         } else if ($event.toElement.tagName === 'circle') {
                             nodeClickId = $event.target.attributes.getNamedItem('node-id').nodeValue;
                             if(startBfs) {
-                                map.resetColors();
                                 map.bfs(nodeClickId);
                                 startBfs = false;
                             } else if (startDfs) {
-
+                                map.dfs(nodeClickId);
+                                startDfs = false;
                             } else {
                                 guide.nodeClicked(nodeClickId);
-                            }
-                        } else {
-                            if(guide.show) {
-                                guide.reset();
                             }
                         }
                     };
