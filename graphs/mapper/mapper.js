@@ -6,8 +6,8 @@
  */
 angular
     .module('mapper')
-    .directive('map', ['$log', 'BFS', '$document', '$rootScope',
-        function ($log, BFS, $document, $rootScope) {
+    .directive('map', ['$log', 'BFS', '$document',
+        function ($log, BFS, $document) {
 
             var startDfs,
                 startBfs;
@@ -101,6 +101,8 @@ angular
                     if(this.show) {
                         this.x2 = x;
                         this.y2 = y;
+
+                        //This hack is necessary to make sure that the guide is never actually under the mouse
                         if(this.x1 > this.x2) {
                             this.x2 = this.x2 - 1;
                         } else {
