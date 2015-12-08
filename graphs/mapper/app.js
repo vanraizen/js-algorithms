@@ -20,7 +20,29 @@ angular
             $scope.startBfs = false;
         });
     })
-    .service('BFS', function($log, $rootScope, $interval) {
+    .service('GraphWalker', function($log, $rootScope) {
+        return {
+            walk: function (visitNode, visited, toVisit) {
+                var adjacentNodes, nodesToPush;
+                $log.log('Visiting -> ', visitNode);
+                $rootScope.$broadcast('markNodes', { node: visitNode, color: 'green' });
+                visited.push(visitNode);
+                $log.log('Visited is now -> ', visited);
+                adjacentNodes = visitNode.getConnections();
+                $log.debug('Adjacent Nodes -> ', adjacentNodes);
+                nodesToPush = [];
+                adjacentNodes.forEach(function(adjacentNode) {
+                    if (visited.indexOf(adjacentNode) === -1 && toVisit.indexOf(adjacentNode) === -1) {
+                        $log.log('Adding to unvisited -> ', adjacentNode);
+                        nodesToPush.push(adjacentNode);
+                    }
+                });
+                Array.prototype.push.apply(toVisit, nodesToPush);
+                return nodesToPush;
+            }
+        }
+    })
+    .service('BFS', function($log, $rootScope, $interval, GraphWalker) {
 
         function bfs (startingNode) {
 
@@ -35,25 +57,11 @@ angular
 
             function visit() {
                 var visitNode = queue.splice(0, 1)[0],
-                    adjacentNodes,
-                    nodesToQueue;
-                $log.log('Visiting -> ', visitNode);
-                $rootScope.$broadcast('markNodes', { node: visitNode, color: 'green' });
-                visited.push(visitNode);
-                $log.log('Visited is now -> ', visited);
-                adjacentNodes = visitNode.getConnections();
-                $log.debug('Adjacent Nodes -> ', adjacentNodes);
-                nodesToQueue = [];
-                adjacentNodes.forEach(function(adjacentNode) {
-                    if (visited.indexOf(adjacentNode) === -1 && queue.indexOf(adjacentNode) === -1) {
-                        console.log('Adding to unvisited -> ', adjacentNode);
-                        nodesToQueue.push(adjacentNode);
-                    }
-                });
-                Array.prototype.push.apply(queue, nodesToQueue);
-                $log.log('Queue is now -> ', queue);
+                    newNodesToVisit;
+
+                newNodesToVisit = GraphWalker.walk(visitNode, visited, queue);
                 if(queue.length) {
-                    $rootScope.$broadcast('markNodes', { nodes: nodesToQueue, color: 'yellow' });
+                    $rootScope.$broadcast('markNodes', { nodes: newNodesToVisit, color: 'yellow' });
                 } else {
                     $log.log('BFS complete...');
                     $rootScope.$broadcast('animationComplete');
@@ -61,7 +69,6 @@ angular
                 }
             }
         }
-
         return {
             go: function (startingNode) {
                 $log.log('starting BFS with node', startingNode.id);
@@ -69,7 +76,7 @@ angular
             }
         }
     })
-    .service('DFS', function($log, $rootScope, $interval) {
+    .service('DFS', function($log, $rootScope, $interval, GraphWalker) {
 
         function dfs (startingNode) {
 
@@ -84,25 +91,10 @@ angular
 
             function visit() {
                 var visitNode = stack.splice(stack.length-1, 1)[0],
-                    adjacentNodes,
-                    nodesToPush;
-                $log.log('Visiting -> ', visitNode);
-                $rootScope.$broadcast('markNodes', { node: visitNode, color: 'green' });
-                visited.push(visitNode);
-                $log.log('Visited is now -> ', visited);
-                adjacentNodes = visitNode.getConnections();
-                $log.debug('Adjacent Nodes -> ', adjacentNodes);
-                nodesToPush = [];
-                adjacentNodes.forEach(function(adjacentNode) {
-                    if (visited.indexOf(adjacentNode) === -1 && stack.indexOf(adjacentNode) === -1) {
-                        console.log('Adding to unvisited -> ', adjacentNode);
-                        nodesToPush.push(adjacentNode);
-                    }
-                });
-                Array.prototype.push.apply(stack, nodesToPush);
-                $log.log('Stack is now -> ', stack);
+                    newNodesToVisit;
+                newNodesToVisit = GraphWalker.walk(visitNode, visited, stack);
                 if(stack.length) {
-                    $rootScope.$broadcast('markNodes', { nodes: nodesToPush, color: 'yellow' });
+                    $rootScope.$broadcast('markNodes', { nodes: newNodesToVisit, color: 'yellow' });
                 } else {
                     $log.log('DFS complete...');
                     $rootScope.$broadcast('animationComplete');
@@ -110,7 +102,6 @@ angular
                 }
             }
         }
-
         return {
             go: function (startingNode) {
                 $log.log('starting DFS with node', startingNode.id);
