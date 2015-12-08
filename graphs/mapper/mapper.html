@@ -10,8 +10,9 @@
         <link rel="stylesheet" type="text/css" href="mapper.css">
     </head>
     <body ng-controller="MapperController">
-        <button ng-click="startDfs()" id="bfsBtn">DFS</button>
-        <button ng-click="startBfs()" id="dfsBtn">BFS</button>
+        <button ng-click="dfs()" id="bfsBtn">DFS</button>
+        <button ng-click="clearGraph()" id="clearBtn">Clear</button>
+        <button ng-click="bfs()" id="dfsBtn" ng-class="startBfs ? 'active' : ''">BFS</button>
         <button ng-click="logMapState()" id="logMapState">Console Log Map State</button>
         <map></map>
     </body>

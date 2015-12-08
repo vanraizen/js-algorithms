@@ -6,8 +6,8 @@
  */
 angular
     .module('mapper')
-    .directive('map', ['$log', 'BFS', '$document',
-        function ($log, BFS, $document) {
+    .directive('map', ['$log', 'BFS', '$document', '$rootScope',
+        function ($log, BFS, $document, $rootScope) {
 
             var startDfs,
                 startBfs;
@@ -15,9 +15,13 @@ angular
             function Map() {
 
                 var map = this;
-                this.nextId = 1;
-                this.nodes = [];
-                this.edges = [];
+
+                this.reset = function () {
+                    this.nextId = 1;
+                    this.nodes = [];
+                    this.edges = [];
+                };
+                this.reset();
 
                 this.addNode = function (x,y) {
                     this.nodes.push(new Node(x,y));
@@ -33,7 +37,10 @@ angular
                     }
                 };
 
-                this.bfs = function (nodeId) { BFS.go(this.getNode(nodeId)) };
+                this.bfs = function (nodeId) {
+                    this.busy = true;
+                    BFS.go(this.getNode(nodeId))
+                };
 
                 this.getEdges = function () { return this.edges };
 
@@ -41,6 +48,12 @@ angular
                     this.nodes.forEach(function(node) {
                         node.resetColor();
                     });
+                };
+
+                this.getNode = function (nodeId) {
+                    var nodeMatch = false;
+                    map.nodes.forEach(function(node) { if(node.id == nodeId) nodeMatch = node;  });
+                    return nodeMatch;
                 };
 
                 function Node(x,y) {
@@ -68,23 +81,19 @@ angular
                     };
                     this.resetColor();
                 }
-
-                this.getNode = function (nodeId) {
-                    var nodeMatch = false;
-                    map.nodes.forEach(function(node) { if(node.id == nodeId) nodeMatch = node;  });
-                    return nodeMatch;
-                }
             }
 
             function NewEdgeGuide(map) {
 
-                var guide = this,
-                    map = map;
+                var guide = this;
 
+                this.resetColor = function () {
+                    this.color = 'red';
+                };
                 this.reset = function () {
                     $document.find('body').css('cursor', 'default');
                     this.show = false;
-                    this.color = 'red';
+                    this.resetColor();
                 };
                 this.reset();
 
@@ -116,7 +125,7 @@ angular
                 };
 
                 this.mouseEntered = function (node) {
-                    if (this.show && this.startingNode.id != node.id) {
+                    if (!startBfs && this.show && this.startingNode.id != node.id) {
                         this.color = 'green';
                     }
                 };
@@ -132,31 +141,9 @@ angular
                 }
 
                 function end (node) {
-                    console.log(guide.startingNode, node);
                     map.addEdge(guide.startingNode, node);
                     guide.reset();
                 }
-            }
-
-            function registerListeners($scope) {
-                $scope.$on('startDfs', function () {
-                    startDfs = true;
-                });
-
-                $scope.$on('startBfs', function () {
-                    startBfs = true;
-                });
-
-                $scope.$on('logMapState', function () {
-                    $log.log('nodes', map.getNodes(), 'edges', map.getEdges());
-                });
-
-                $scope.$on('markNodes', function (event, args) {
-                    var nodes = args.nodes || [args.node];
-                    nodes.forEach(function(node) {
-                        node.color = args.color;
-                    })
-                });
             }
 
             'use strict';
@@ -168,18 +155,20 @@ angular
                 templateUrl: 'map.html',
                 link: function ($scope, element, attrs) {
 
-                    var map = new Map(),
-                        guide = new NewEdgeGuide(map);
+                    var map, guide;
 
-                    $scope.edges = map.getEdges();
-                    $scope.nodes = map.getNodes();
-                    $scope.newEdgeGuide = guide;
+                    init();
 
                     $scope.handleClick = function ($event) {
                         var nodeClickId;
                         //console.log($event);
                         if ($event.toElement.tagName === 'svg') {
-                            map.addNode($event.x, $event.y);
+                            if (startBfs) {
+                                $scope.$emit('clearModes');
+                                startBfs = startDfs = false;
+                            } else {
+                                map.addNode($event.x, $event.y);
+                            }
                         } else if ($event.toElement.tagName === 'circle') {
                             nodeClickId = $event.target.attributes.getNamedItem('node-id').nodeValue;
                             if(startBfs) {
@@ -198,8 +187,6 @@ angular
                         }
                     };
 
-                    registerListeners($scope);
-
                     $scope.registerMouseLocation = function($event) {
                         $scope.newEdgeGuide.registerMouseLocation($event.x, $event.y);
                     };
@@ -208,6 +195,47 @@ angular
                         node.color = 'blue';
                         guide.mouseEntered(node);
                     };
+
+                    $scope.nodeMouseExited = function (node) {
+                        if (!map.busy) {
+                            node.resetColor();
+                            guide.resetColor();
+                        }
+                    };
+
+                    function init() {
+                        map = new Map();
+                        guide = new NewEdgeGuide(map);
+                        $scope.edges = map.getEdges();
+                        $scope.nodes = map.getNodes();
+                        $scope.newEdgeGuide = guide;
+                    }
+
+                    (function registerListeners() {
+                        $scope.$on('startDfs', function () {
+                            startDfs = true;
+                        });
+                        $scope.$on('startBfs', function () {
+                            startBfs = true;
+                        });
+                        $scope.$on('logMapState', function () {
+                            $log.log('nodes', map.getNodes(), 'edges', map.getEdges());
+                        });
+                        $scope.$on('markNodes', function (event, args) {
+                            var nodes = args.nodes || [args.node];
+                            nodes.forEach(function(node) {
+                                node.color = args.color;
+                            })
+                        });
+                        $scope.$on('clearGraph', function () {
+                            $log.debug('resetting graph...');
+                            init();
+                        });
+                        $scope.$on('animationComplete', function () {
+                            $scope.$emit('clearModes');
+                            map.busy = false;
+                        });
+                    })();
                 }
             };
         }]);

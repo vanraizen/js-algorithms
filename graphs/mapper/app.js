@@ -1,15 +1,23 @@
 angular
     .module('mapper', [])
     .controller('MapperController', function($scope) {
-        $scope.startDfs = function () {
+        $scope.dfs = function () {
             $scope.$broadcast('startDfs');
         };
-        $scope.startBfs = function () {
+        $scope.bfs = function () {
+            $scope.startBfs = true;
             $scope.$broadcast('startBfs');
         };
         $scope.logMapState = function () {
             $scope.$broadcast('logMapState');
         };
+        $scope.clearGraph = function () {
+            $scope.$broadcast('clearGraph');
+        };
+        $scope.$on('clearModes', function () {
+            $scope.startDfs = false;
+            $scope.startBfs = false;
+        });
     })
     .service('BFS', function($log, $rootScope, $interval) {
 
@@ -47,6 +55,7 @@ angular
                     $rootScope.$broadcast('markNodes', { nodes: nodesToQueue, color: 'yellow' });
                 } else {
                     $log.log('BFS complete...');
+                    $rootScope.$broadcast('animationComplete');
                     $interval.cancel(runIntervalId);
                 }
             }

@@ -1,5 +1,5 @@
 <svg ng-click="handleClick($event)" ng-mousemove="registerMouseLocation($event)">
-    <circle ng-repeat="node in nodes" ng-attr-cx="{{node.x}}" ng-attr-cy="{{node.y}}" ng-attr-r="{{node.radius}}" fill="{{node.color}}" node-id="{{node.id}}" ng-mouseenter="nodeMouseEntered(node)" ng-mouseleave="node.resetColor()" />
+    <circle ng-repeat="node in nodes" ng-attr-cx="{{node.x}}" ng-attr-cy="{{node.y}}" ng-attr-r="{{node.radius}}" fill="{{node.color}}" node-id="{{node.id}}" ng-mouseenter="nodeMouseEntered(node)" ng-mouseleave="nodeMouseExited(node)" />
     <text ng-repeat="node in nodes" ng-attr-x="{{node.x-(node.radius/2)}}" ng-attr-y="{{node.y+(2*node.radius)}}" dy="0.25em" fill="white">{{node.id}}</text>
     <line ng-repeat="edge in edges" ng-attr-x1="{{edge.x1}}" ng-attr-y1="{{edge.y1}}" ng-attr-x2="{{edge.x2}}" ng-attr-y2="{{edge.y2}}" style="stroke:rgb(255,255,255);stroke-width:1" />
     <line id="newEdgeGuide" ng-show="newEdgeGuide.show" ng-attr-x1="{{newEdgeGuide.x1}}" ng-attr-y1="{{newEdgeGuide.y1}}" ng-attr-x2="{{newEdgeGuide.x2}}" ng-attr-y2="{{newEdgeGuide.y2}}" style="stroke:{{newEdgeGuide.color}};stroke-width:1" />
