@@ -1,0 +1,3 @@
+<svg ng-mousemove="registerMouseLocation($event)">
+    <circle ng-repeat="circle in circles" ng-attr-cx="{{circle.x}}" ng-attr-cy="{{circle.y}}" ng-attr-r="{{circle.size}}" fill="rgb({{circle.r}},{{circle.g}},{{circle.b}})" />
+</svg>
