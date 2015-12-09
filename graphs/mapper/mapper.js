@@ -1,8 +1,8 @@
 /*global angular, $ */
 /**
  * @ngdoc directive
- * @name signportal
- * @description The wrapper directive around the skyslopeSignatureBox, providing a scrollable window over documents images containing signature fixtures.
+ * @name map
+ * @description A directive that maintains the list of nodes and edges and handles event handling for performing dfs/bfs
  */
 angular
     .module('mapper')

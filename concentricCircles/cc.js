@@ -1,8 +1,8 @@
 /*global angular, $ */
 /**
  * @ngdoc directive
- * @name signportal
- * @description The wrapper directive around the skyslopeSignatureBox, providing a scrollable window over documents images containing signature fixtures.
+ * @name circles
+ * @description The container where all the SVG circles will drop, appropriately sized with CircleGenerator
  */
 angular
     .module('mapper')
