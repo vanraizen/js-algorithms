@@ -1,8 +1,8 @@
 angular
     .module('mapper', [])
     .service('CircleGenerator', function($interval, $document, $window) {
-        var clientWidth = $window.outerWidth,
-            clientHeight = $window.outerHeight,
+        var clientWidth = $window.innerWidth,
+            clientHeight = $window.innerHeight,
             circlesAdded = 0;
         console.log($window);
         function FollowingCircle(size) {
