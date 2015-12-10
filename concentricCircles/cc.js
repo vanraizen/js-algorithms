@@ -24,7 +24,7 @@ angular
                     for(i = 0; i < circles; i++) {
                         var newCircle = CircleGenerator.generate(circles);
                         if (newCircle) {
-                            console.log(newCircle);
+                            $log.log(newCircle);
                             $scope.circles.push(newCircle);
                         }
                     }
