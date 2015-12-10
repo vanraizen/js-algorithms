@@ -5,6 +5,7 @@ Implementation of popular short problems:
 * List all duplicates in array
 * List all duplicates in string
 * Binary Search
+* Fibonacci number generator
 
 Implementation of popular search algorithms:
 * Depth First Search
@@ -22,4 +23,16 @@ Implementation of popular tree traversal algorithms:
 * In-Order Traversal
 * Post-Order Traversal
 
-Implementation of Tic Tac Toe game in HTML/CSS/JavaScript
+Sorting algorithms:
+* Bubble Sort
+* Insertion Sort
+* Merge Sort
+
+Vizualisers:
+* DFS/BFS Graph Walking Visualizer
+* Concentric Circles w/ random color generation
+* Particle Generator w/ randomized movements
+
+Tic Tac Toe game in HTML/CSS/JavaScript
+Solution that detects if queens on a game board are within attack range of each other
+
