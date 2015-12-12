@@ -1,0 +1,9 @@
+<div>
+    <ul>
+        <li ng-repeat="message in messages track by $index">{{message}}</li>
+    </ul>
+    <form ng-submit="sendMessage()">
+        <input type="text" ng-model="newMessage">
+        <input type="submit" value="Send" />
+    </form>
+</div>
