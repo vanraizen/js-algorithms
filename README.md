@@ -34,7 +34,7 @@ Sorting algorithms:
 * Insertion Sort
 * Merge Sort
 
-Vizualisers:
+Visualizers:
 * DFS/BFS Graph Walking Visualizer
 * Concentric Circles w/ random color generation
 * Particle Generator w/ randomized movements
