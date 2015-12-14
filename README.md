@@ -23,6 +23,12 @@ Implementation of popular tree traversal algorithms:
 * In-Order Traversal
 * Post-Order Traversal
 
+Data Structures:
+* Singly Linked List
+* Doubly Linked List
+* Stack (Using singly linked list)
+* Queue (Using doubly linked list)
+
 Sorting algorithms:
 * Bubble Sort
 * Insertion Sort
