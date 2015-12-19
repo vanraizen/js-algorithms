@@ -43,4 +43,4 @@ Other Solutions:
 * Tic Tac Toe game in HTML/CSS/JavaScript
 * Solution that detects if queens on a game board are within attack range of each other
 * Example Angular/Node/WebSockets live chat client/server
-
+* Demonstration of how to use various Array functions to solve a simplified real world problem
