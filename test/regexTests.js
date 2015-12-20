@@ -1,5 +1,5 @@
 var expect = require('chai').expect,
-    regex = require('../regex');
+    regex = require('../misc/regex');
 
 describe('Regex Tests', function() {
 

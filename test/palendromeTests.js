@@ -1,9 +1,9 @@
 /*global describe, it*/
 
 var expect = require('chai').expect,
-    palendromeRecursive = require('../palendrome')('recursive'),
-    palendromeIterative = require('../palendrome')('iterative'),
-    palendromeNative = require('../palendrome')('native');
+    palendromeRecursive = require('../misc/palendrome')('recursive'),
+    palendromeIterative = require('../misc/palendrome')('iterative'),
+    palendromeNative = require('../misc/palendrome')('native');
 
 describe('Palendrome Recursive Tests', function () {
 

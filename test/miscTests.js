@@ -1,6 +1,6 @@
 var expect = require('chai').expect,
-    misc = require('../misc'),
-    QueensGame = require('../queens');
+    misc = require('../misc/misc'),
+    QueensGame = require('../misc/queens');
 
 describe('Misc Tests', function() {
 

@@ -1,5 +1,5 @@
 var expect = require('chai').expect,
-    sorting = require('../sorting');
+    sorting = require('../misc/sorting');
 
 describe('Sorting Tests', function() {
 

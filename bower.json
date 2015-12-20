@@ -1,0 +1,19 @@
+{
+  "name": "js-algorithms",
+  "version": "1.0.0",
+  "homepage": "https://github.com/vanraizen/js-algorithms",
+  "authors": [
+    "Fadi Chalfoun"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "ng-websocket": "~0.2.1",
+    "jquery": "*"
+  }
+}

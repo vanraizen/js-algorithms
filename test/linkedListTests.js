@@ -1,5 +1,5 @@
 var expect = require('chai').expect,
-    linkedLists = require('../linkedLists');
+    linkedLists = require('../misc/linkedLists');
 
 describe('Test Stack', function () {
 

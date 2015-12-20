@@ -1,8 +1,8 @@
 /*global describe, it*/
 
 var expect = require('chai').expect,
-    fibRecursive = require('../fib')('recursive'),
-    fibIterative = require('../fib')('iterative');
+    fibRecursive = require('../misc/fib')('recursive'),
+    fibIterative = require('../misc/fib')('iterative');
 
 describe('Recursive Fibonacci Tests', function () {
 

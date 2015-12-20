@@ -1,7 +1,7 @@
 /*global describe, it*/
 
 var expect = require('chai').expect,
-    arrayFunctions = require('../arrayFunctions');
+    arrayFunctions = require('../misc/arrayFunctions');
 
 describe('Array Function Tests', function () {
 
