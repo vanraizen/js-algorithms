@@ -1,5 +1,6 @@
 var expect = require('chai').expect,
-    misc = require('../misc');
+    misc = require('../misc'),
+    QueensGame = require('../queens');
 
 describe('Misc Tests', function() {
 
@@ -35,6 +36,73 @@ describe('Misc Tests', function() {
             expect(misc.binarySearch([1, 2, 5, 77, 222, 1, 2, 7, 0], 0)).to.equal(true);
             expect(misc.binarySearch([1, 2, 5, 77, 222, 1, 2, 7, 0, 4], 4)).to.equal(true);
             expect(misc.binarySearch([1, 2, 5, 77, 222, 1, 2, 7], 80)).to.equal(false);
+        });
+    });
+
+    describe('Queen Tests', function () {
+
+        var game;
+
+        before(function () {
+            game = new QueensGame();
+        });
+
+        beforeEach(function() {
+            game.clear();
+        });
+
+        it('Test Enemy MISS', function () {
+            game.addQueen(0, 0, 0);
+            game.addQueen(2, 2, 1);
+            expect(game.check()).to.equal(false);
+        });
+
+        it('Test Enemy Queen UP', function () {
+            game.addQueen(2, 1, 0);
+            game.addQueen(2, 2, 1);
+            expect(game.check()).to.equal(true);
+        });
+
+        it('Test Enemy Queen UP RIGHT', function () {
+            game.addQueen(2, 1, 0);
+            game.addQueen(3, 0, 1);
+            expect(game.check()).to.equal(true);
+        });
+
+        it('Test Enemy Queen RIGHT', function () {
+            game.addQueen(1, 1, 0);
+            game.addQueen(2, 1, 1);
+            expect(game.check()).to.equal(true);
+        });
+
+        it('Test Enemy Queen DOWN RIGHT', function () {
+            game.addQueen(2, 1, 0);
+            game.addQueen(3, 2, 1);
+            expect(game.check()).to.equal(true);
+        });
+
+        it('Test Enemy Queen DOWN', function () {
+            game.addQueen(2, 1, 0);
+            game.addQueen(2, 0, 1);
+            expect(game.check()).to.equal(true);
+        });
+
+        it('Test Enemy Queen DOWN LEFT', function () {
+            game.addQueen(2, 1, 0);
+            game.addQueen(1, 2, 1);
+            expect(game.check()).to.equal(true);
+        });
+
+        it('Test Enemy Queen LEFT', function () {
+            game.addQueen(2, 1, 0);
+            game.addQueen(1, 1, 1);
+            expect(game.check()).to.equal(true);
+        });
+
+        it('Test Enemy Queen UP LEFT', function () {
+            game.addQueen(2, 1, 0);
+            game.addQueen(1, 0, 1);
+            expect(game.check()).to.equal(true);
         });
     });
 });
