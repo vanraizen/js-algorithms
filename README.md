@@ -1,5 +1,7 @@
 # js-algorithms
 
+## Note: "npm install && bower install" to download all dependencies
+
 Implementation of popular short problems:
 * Palendrome (both recursive/iterative solutions provided)
 * List all duplicates in array
