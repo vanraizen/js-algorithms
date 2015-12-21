@@ -37,4 +37,25 @@ describe('Regex Tests', function() {
             expect(regex.isEmail('.com@test.com')).to.equal(false);
         });
     });
+
+    describe('Parse File System', function () {
+
+        it('Test Small Sample', function () {
+            var input = ["dir1/dir2///dir3/file1.jpg", "dir1/dir2///dir3/file2.jpg", "dir1/dir2///file3.jpg", "dir1/file4.jpg"],
+                expectedResult = {
+                    dir1: {
+                        dir2: {
+                            dir3: {
+                                'file1.jpg': true,
+                                'file2.jpg': true
+                            },
+                            'file3.jpg': true
+                        },
+                        'file4.jpg': true
+                    }
+                };
+
+            expect(regex.parseFileSystem(input)).to.eql(expectedResult);
+        });
+    });
 });
