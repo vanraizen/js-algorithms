@@ -19,6 +19,7 @@ Implemented various regex uses:
 * Tag attribute replace
 * Trim
 * Valid Email Detection
+* Generate a file system tree based on an input of full file paths
 
 Implementation of popular tree traversal algorithms:
 * Pre-Order Traversal
