@@ -1,5 +1,5 @@
 angular
-    .module('mapper', [])
+    .module('app', [])
     .service('MagicParticles', function($interval, $document, $window) {
         var clientWidth = $window.innerWidth,
             clientHeight = $window.innerHeight,
