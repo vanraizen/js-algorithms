@@ -42,6 +42,10 @@ describe('Recursive Fibonacci Tests', function () {
         it('n = 8', function () {
             expect(fibRecursive.fib(8)).to.equal(21);
         });
+
+        it('n = 100, (testing cache performance basically)', function () {
+            expect(fibRecursive.fib(100)).to.equal(354224848179262000000);
+        });
     });
 });
 
